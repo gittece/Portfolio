@@ -10,6 +10,7 @@ import Contact from "./Contact";
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+  const base = import.meta.env.BASE_URL;
 
   const sentences = [
   "Front-end designer.",
@@ -89,7 +90,7 @@ useEffect(() => {
     <div className="app">
       <div className="bg-layer">
         <video className="bg-video" autoPlay loop muted playsInline>
-          <source src="public/bgvideo/video.mp4" type="video/mp4" />
+          <source src={`${base}bgvideo/video.mp4`} type="video/mp4" />
         </video>
       </div>
       
@@ -138,7 +139,7 @@ useEffect(() => {
       <section id="home" className="home">
         <div className="home-left">
           <img
-            src="public/profile.png"
+            src={`${base}profile.png`}
             alt="MAY ANNE HAZELYN O. ARBOIZ"
             className="profile-img"
           />
@@ -198,9 +199,10 @@ useEffect(() => {
               <FaTelegramPlane />
             </a>
           </div>
-          <a href="/cv/Arboiz_May_anne_CV.pdf" className="cv-btn" download>
-            Download CV
+          <a href={`${base}cv/Arboiz_May_anne_CV.pdf`} className="cv-btn" download>
+              Download CV
           </a>
+
         </div>
       </section>
 
