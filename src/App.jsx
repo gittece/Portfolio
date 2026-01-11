@@ -89,7 +89,7 @@ useEffect(() => {
     <div className="app">
       <div className="bg-layer">
         <video className="bg-video" autoPlay loop muted playsInline>
-          <source src="/bgvideo/video.mp4" type="video/mp4" />
+          <source src="public/bgvideo/video.mp4" type="video/mp4" />
         </video>
       </div>
       
