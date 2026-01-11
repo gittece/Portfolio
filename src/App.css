@@ -69,8 +69,6 @@ html {
 .app {
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden;  /* prevent horizontal scroll */
-  overflow-y: visible; /* allow shadows/hover to show */
 }
 
 /* Background layer (video + overlay) */

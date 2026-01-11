@@ -8,12 +8,26 @@
   --text: #6C131F;   /* text */
 }
 
-hr{
-    height: 2px;
-    width: 100%;
-    background-color: var(--text);
-    
+/* ✅ Scroll lock when modal is open (toggle in Projects.jsx) */
+body.modal-open {
+  overflow: hidden;
+  height: 100%;
 }
+
+/* Optional: improve touch behavior on mobile */
+html, body {
+  width: 100%;
+}
+
+hr {
+  height: 2px;
+  width: 100%;
+  background-color: var(--text);
+}
+
+/* ================================
+   Layout
+================================ */
 .projects {
   width: 100%;
   position: relative;
@@ -56,12 +70,12 @@ hr{
 }
 
 /* ================================
-   Card button
+   Card
 ================================ */
 .project-card {
   text-align: left;
   border: none;
-  background: rgba(255, 236, 234, 0.50);
+  background: rgba(255, 236, 234, 0.5);
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
@@ -78,11 +92,11 @@ hr{
 
 .project-thumb {
   width: 100%;
-  aspect-ratio: 2 / 1;   /* consistent thumbnail shape */
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-start-end-radius: 18px;
   border-start-start-radius: 18px;
-  margin: 0rem 0rem;/* optional: gives clean padding inside card */
+  margin: 0;
 }
 
 .project-thumb img {
@@ -98,9 +112,9 @@ hr{
 }
 
 .project-body h3 {
- font-size: 1.05rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  margin-bottom: 0.15rem; /* less vertical space */
+  margin-bottom: 0.15rem;
   color: var(--text);
 }
 
@@ -111,29 +125,50 @@ hr{
 }
 
 /* ================================
-   Modal / Lightbox
+   Modal / Lightbox (STABLE)
 ================================ */
+
+/* ✅ This keeps the modal attached to the VIEWPORT (not the page scroll) */
 .modal-overlay {
- position: fixed;
-  inset: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.822);
+  z-index: 9999;
+
   display: flex;
-  align-items: flex-start; 
   justify-content: center;
-  padding: 6rem 1.25rem 1.25rem; 
-  z-index: 2000;
+  align-items: center;
+
+  /* safe space around modal */
+  padding: 1.25rem;
+
+  /* allow modal to scroll on small screens */
+  overflow-y: auto;
+
+  /* prevents scroll from “passing through” to the page */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal {
-  width: min(820px, calc(100vw - 3rem)); /* smaller cap + safe gutters */
-  max-height: calc(100vh - 3rem);        /* prevents super tall modal */
+  width: min(820px, calc(100vw - 2.5rem));
   display: flex;
   flex-direction: column;
+
   background: var(--base);
   border: 1px solid rgba(108, 19, 31, 0.18);
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  /* ✅ never exceed viewport */
+  max-height: calc(100dvh - 2.5rem);
+
+  /* center inside scrollable overlay */
+  margin: auto;
 }
 
 .modal-top {
@@ -175,13 +210,12 @@ hr{
 /* ✅ Symmetric nav rails */
 .modal-body {
   display: grid;
-  grid-template-columns: 52px 1fr 52px; /* slightly tighter */
+  grid-template-columns: 52px 1fr 52px;
   align-items: center;
-  padding: 0.85rem;                      /* was 1rem */
+  padding: 0.85rem;
   gap: 0.6rem;
 }
 
-/* Center the buttons perfectly in their columns */
 .modal-body > .modal-nav {
   justify-self: center;
   align-self: center;
@@ -189,20 +223,23 @@ hr{
 
 .modal-imageWrap {
   width: 100%;
-  max-height: 58vh; /* was 70vh */
   display: flex;
   justify-content: center;
   align-items: center;
+
   overflow: hidden;
   border-radius: 14px;
   background: var(--text);
+
+  /* stable image area */
+  max-height: 58dvh;
 }
 
 .modal-imageWrap img {
   display: block;
-  max-height: 58vh;
   width: 100%;
-  object-fit: contain;
+  max-height: 58dvh;
+  object-fit: cover;
 }
 
 .modal-nav {
@@ -217,7 +254,7 @@ hr{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .modal-nav:hover {
@@ -244,18 +281,14 @@ hr{
     grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
 
-   .modal-overlay {
-    align-items: flex-start;
-    padding: 5.5rem 1rem 1rem; /* pushes modal down under navbar */
-  }
-
   .modal {
     width: min(780px, 100%);
-    max-height: calc(100vh - 6.5rem);
+    max-height: calc(100dvh - 2rem);
   }
 
-  .modal-imageWrap {
-    max-height: 55vh; /* bigger image area */
+  .modal-imageWrap,
+  .modal-imageWrap img {
+    max-height: 55dvh;
   }
 }
 
@@ -281,36 +314,27 @@ hr{
     width: 102%;
   }
 
-  /* Push modal down + give more usable height */
-  .modal-overlay {
-    align-items: flex-start;
-    padding: 7.25rem 0.9rem 1rem;
-  }
-
   .modal {
     width: 100%;
-    max-height: calc(100vh - 6.25rem);
     border-radius: 16px;
+    max-height: calc(100dvh - 2rem);
   }
 
   .modal-top {
     padding: 0.85rem 0.9rem;
   }
 
-  /* Make the image area bigger and prevent it from shrinking too much */
   .modal-body {
-    grid-template-columns: 36px 1fr 36px; /* smaller rails */
+    grid-template-columns: 36px 1fr 36px;
     padding: 0.75rem;
     gap: 0.5rem;
   }
 
-  .modal-imageWrap {
-    max-height: 62vh;   /* more height = bigger image */
-    overflow: auto;
-    border-radius: 12px;
+  .modal-imageWrap,
+  .modal-imageWrap img {
+    max-height: 62dvh;
   }
 
-  /* Smaller nav buttons */
   .modal-nav {
     height: 34px;
     width: 34px;
@@ -323,9 +347,8 @@ hr{
   }
 }
 
-@media (max-width: 375px){
-    .modal-overlay {
-        padding: 9rem 0.9rem 1rem;
-    }
-    
+@media (max-width: 375px) {
+  .modal {
+    max-height: calc(100dvh - 1.5rem);
+  }
 }

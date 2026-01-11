@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import "./Projects.css";
+import { createPortal } from "react-dom";
+
 
 const base = import.meta.env.BASE_URL;
+
 const projects = [
   {
     title: "Academic Portfolio v.1",
@@ -45,14 +48,13 @@ const projects = [
   },
 ];
 
-
-
 export default function Projects() {
   const [open, setOpen] = useState(false);
   const [projectIndex, setProjectIndex] = useState(0);
   const [shotIndex, setShotIndex] = useState(0);
 
   const currentProject = projects[projectIndex];
+  const totalShots = currentProject?.screenshots?.length ?? 0;
   const currentShot = currentProject?.screenshots?.[shotIndex];
 
   const openModal = (pIdx) => {
@@ -64,34 +66,40 @@ export default function Projects() {
   const closeModal = () => setOpen(false);
 
   const next = () => {
-    const total = currentProject.screenshots.length;
-    setShotIndex((prev) => (prev + 1) % total);
+    setShotIndex((prev) => (prev + 1) % totalShots);
   };
 
   const prev = () => {
-    const total = currentProject.screenshots.length;
-    setShotIndex((prev) => (prev - 1 + total) % total);
+    setShotIndex((prev) => (prev - 1 + totalShots) % totalShots);
   };
 
-  // Close on ESC, prevent background scroll
+  /* ✅ Lock background scroll + keyboard controls (ONLY when open changes) */
   useEffect(() => {
     if (!open) return;
 
+    // add body class (works with CSS body.modal-open)
+    document.body.classList.add("modal-open");
+
     const onKeyDown = (e) => {
+      // prevent arrows from scrolling the page
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+      }
+
       if (e.key === "Escape") closeModal();
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
     };
 
-    document.addEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown, { passive: false });
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
     };
+    // ✅ only depend on open + totalShots
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, projectIndex, shotIndex]);
+  }, [open, totalShots]);
 
   return (
     <section className="projects" id="projects">
@@ -99,9 +107,10 @@ export default function Projects() {
         <div className="projects-header">
           <h2>Projects</h2>
           <hr />
-          <p>These are the projects I created from 2022 to 2024.<br></br>
-            I explored, learned, and is ready to create better
-            projects soon.
+          <p>
+            These are the projects I created from 2022 to 2024.
+            <br />
+            I explored, learned, and is ready to create better projects soon.
           </p>
         </div>
 
@@ -125,43 +134,50 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Modal */}
-      {open && (
-        <div className="modal-overlay" onClick={closeModal} role="presentation">
-          <div className="modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
-            <div className="modal-top">
-              <div className="modal-title">
-                <h3>{currentProject.title}</h3>
-                <p>
-                  Screenshot {shotIndex + 1} / {currentProject.screenshots.length}
-                </p>
+      {/* Modal (Portal) */}
+      {open &&
+        createPortal(
+          <div className="modal-overlay" onClick={closeModal} role="presentation">
+            <div
+              className="modal"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+            >
+              <div className="modal-top">
+                <div className="modal-title">
+                  <h3>{currentProject.title}</h3>
+                  <p>
+                    Screenshot {shotIndex + 1} / {totalShots}
+                  </p>
+                </div>
+
+                <button className="modal-close" onClick={closeModal} aria-label="Close modal">
+                  ✕
+                </button>
               </div>
 
-              <button className="modal-close" onClick={closeModal} aria-label="Close modal">
-                ✕
-              </button>
-            </div>
+              <div className="modal-body">
+                <button className="modal-nav" onClick={prev} aria-label="Previous screenshot">
+                  ‹
+                </button>
 
-            <div className="modal-body">
-              <button className="modal-nav" onClick={prev} aria-label="Previous screenshot">
-                ‹
-              </button>
+                <div className="modal-imageWrap">
+                  <img src={currentShot} alt={`${currentProject.title} screenshot`} />
+                </div>
 
-              <div className="modal-imageWrap">
-                <img src={currentShot} alt={`${currentProject.title} screenshot`} />
+                <button className="modal-nav" onClick={next} aria-label="Next screenshot">
+                  ›
+                </button>
               </div>
 
-              <button className="modal-nav" onClick={next} aria-label="Next screenshot">
-                ›
-              </button>
+              <div className="modal-hint">
+                <span>Tip: Use ← → keys to navigate, ESC to close</span>
+              </div>
             </div>
-
-            <div className="modal-hint">
-              <span>Tip: Use ← → keys to navigate, ESC to close</span>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
