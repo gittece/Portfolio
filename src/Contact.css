@@ -1,0 +1,219 @@
+/* ================================
+   Contact Section (Reference Layout)
+================================ */
+.contact {
+  width: 100%;
+  padding: 2rem 0 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr; /* left wide, right card */
+  gap: 2.2rem;
+  align-items: start;
+}
+
+/* LEFT */
+.contact-left h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text);
+  font-family: 'Poppins';
+}
+
+.contact-lead {
+  margin-top: 0.8rem;
+  max-width: 560px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  opacity: 0.9;
+  color: var(--text);
+}
+
+.contact-details {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.contact-detail {
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: none;
+  opacity: 0.95;
+}
+
+.contact-social {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact-social a {
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: none;
+  opacity: 0.95;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.contact-social a:hover {
+  opacity: 1;
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+/* mini info grid */
+.contact-miniGrid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.mini-card {
+  padding: 1rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 236, 234, 0.45);
+  border: 1px solid rgba(108, 19, 31, 0.16);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.mini-card h4 {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.mini-card p {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  opacity: 0.86;
+  color: var(--text);
+}
+
+/* RIGHT */
+.contact-card {
+  background: rgba(255, 236, 234, 0.034);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(2px);
+  padding: 1.50rem 1.50rem;
+}
+
+.contact-card h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--text);
+  font-family: 'Poppins';
+}
+
+.contact-cardSub {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  color: var(--text);
+}
+
+.contact-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(108, 19, 31, 0.25);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-submit {
+  margin-top: 0.25rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: var(--base);
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.contact-submit:hover {
+  transform: translateY(-2px);
+  background: transparent;
+  color: var(--text);
+}
+
+.contact-legal {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  opacity: 0.8;
+  color: var(--text);
+  text-align: center;
+}
+
+.contact-legal span {
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+/* Footer */
+.contact-footer {
+  margin-top: 5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(108, 19, 31, 0.15);
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.80;
+  color: var(--text);
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 980px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-miniGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-left h2 {
+    font-size: 2.4rem;
+  }
+}

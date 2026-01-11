@@ -1,0 +1,292 @@
+/* ================================
+   About Section
+================================ */
+.about {
+  width: 100%;
+  padding: 1rem 0 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.about-header h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  font-family: "Poppins";
+  color: var(--text);
+}
+
+.about-header p {
+  margin-top: 0.6rem;
+  font-size: 1.05rem;
+  opacity: 0.9;
+  color: var(--text);
+}
+
+/* Reusable card */
+.about-card {
+  background: rgba(255, 236, 234, 0.034);
+  border: 1px solid rgba(108, 19, 31, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(2px);
+  padding: 1.50rem 1.50rem;
+}
+
+.about-sectionTitle h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-family: 'Poppins';
+  color: var(--text);
+}
+
+.about-sectionTitle p {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  color: var(--text);
+}
+
+/* Top layout */
+.about-top {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.about-desc h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.about-desc p {
+  color: var(--text);
+  opacity: 0.92;
+  line-height: 1.6;
+}
+
+.about-meta {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.about-metaRow {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.about-metaLabel {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  color: var(--text);
+}
+
+.about-metaValue {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Timeline */
+.timeline {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  position: relative;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  margin-top: 0.35rem;
+  background: var(--text);
+  box-shadow: 0 0 0 5px rgba(108, 19, 31, 0.10);
+}
+
+.timeline-content {
+  border-left: 2px solid rgba(108, 19, 31, 0.18);
+  padding-left: 0.9rem;
+}
+
+.timeline-year {
+  font-weight: 900;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.timeline-title {
+  margin-top: 0.15rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.timeline-desc {
+  margin-top: 0.2rem;
+  opacity: 0.70;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* 3-column grid section */
+.about-grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Skills */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+
+/* Lists */
+.list {
+  list-style: none;
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+
+  padding: 0.85rem 0.85rem;
+  border-radius: 14px;
+  border: 1px solid rgba(108, 19, 31, 0.16);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.list-main {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.list-title {
+  font-weight: 900;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.list-sub {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  color: var(--text);
+}
+
+.list-year {
+  font-weight: 900;
+  opacity: 0.9;
+  color: var(--text);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+
+/* ================================
+   Skills and Icons only
+================================ */
+.skills-grid.icons-only {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+.skill-icon {
+  height: 64px;
+  width: 64px;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(108, 19, 31, 0.2);
+  color: var(--text);
+
+  font-size: 2rem;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.skill-icon:hover {
+  background-color: var(--text);
+  color: var(--base);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.about-description{
+    text-align: justify;
+    text-indent: 2rem;
+}
+
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 980px) {
+  .about-top {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid3 {
+    grid-template-columns: 1fr;
+  }
+
+  .about-header h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    padding: 1rem 0 4rem;
+  }
+
+  .about-header h2 {
+    font-size: 2.1rem;
+  }
+
+  .about-header p {
+    font-size: 1rem;
+  }
+}

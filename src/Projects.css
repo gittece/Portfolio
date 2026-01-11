@@ -1,0 +1,330 @@
+/* ================================
+   Projects Section
+================================ */
+
+:root {
+  --base: #FFECEA;   /* background */
+  --accent: #A14B58; /* accent */
+  --text: #6C131F;   /* text */
+}
+
+hr{
+    height: 2px;
+    width: 100%;
+    background-color: var(--text);
+    
+}
+.projects {
+  width: 100%;
+  position: relative;
+  padding: 1rem 0 2rem;
+  z-index: 1;
+}
+
+.projects-container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.projects-header h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  font-family: "Poppins";
+  color: var(--text);
+}
+
+.projects-header p {
+  margin-top: 0.6rem;
+  font-size: 1.05rem;
+  opacity: 0.9;
+}
+
+/* ================================
+   Grid
+================================ */
+.projects-grid {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+}
+
+/* ================================
+   Card button
+================================ */
+.project-card {
+  text-align: left;
+  border: none;
+  background: rgba(255, 236, 234, 0.50);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 15rem;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(82, 1, 1, 0.452);
+}
+
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 2 / 1;   /* consistent thumbnail shape */
+  overflow: hidden;
+  border-start-end-radius: 18px;
+  border-start-start-radius: 18px;
+  margin: 0rem 0rem;/* optional: gives clean padding inside card */
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.project-body {
+  padding: 1rem 0 1rem 1rem;
+}
+
+.project-body h3 {
+ font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 0.15rem; /* less vertical space */
+  color: var(--text);
+}
+
+.project-note {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  color: var(--text);
+}
+
+/* ================================
+   Modal / Lightbox
+================================ */
+.modal-overlay {
+ position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.822);
+  display: flex;
+  align-items: flex-start; 
+  justify-content: center;
+  padding: 6rem 1.25rem 1.25rem; 
+  z-index: 2000;
+}
+
+.modal {
+  width: min(820px, calc(100vw - 3rem)); /* smaller cap + safe gutters */
+  max-height: calc(100vh - 3rem);        /* prevents super tall modal */
+  display: flex;
+  flex-direction: column;
+  background: var(--base);
+  border: 1px solid rgba(108, 19, 31, 0.18);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid rgba(108, 19, 31, 0.15);
+}
+
+.modal-title h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 0.15rem;
+  color: var(--text);
+}
+
+.modal-title p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  color: var(--text);
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.35rem;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(108, 19, 31, 0.08);
+}
+
+/* ✅ Symmetric nav rails */
+.modal-body {
+  display: grid;
+  grid-template-columns: 52px 1fr 52px; /* slightly tighter */
+  align-items: center;
+  padding: 0.85rem;                      /* was 1rem */
+  gap: 0.6rem;
+}
+
+/* Center the buttons perfectly in their columns */
+.modal-body > .modal-nav {
+  justify-self: center;
+  align-self: center;
+}
+
+.modal-imageWrap {
+  width: 100%;
+  max-height: 58vh; /* was 70vh */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  border-radius: 14px;
+  background: var(--text);
+}
+
+.modal-imageWrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-nav {
+  height: 46px;
+  width: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(108, 19, 31, 0.2);
+  background: var(--text);
+  color: var(--base);
+  cursor: pointer;
+  font-size: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.modal-nav:hover {
+  transform: translateY(-2px);
+}
+
+.modal-hint {
+  padding: 0.85rem 1.1rem 1.1rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  color: var(--text);
+  text-align: center;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 980px) {
+  .projects-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+
+   .modal-overlay {
+    align-items: flex-start;
+    padding: 5.5rem 1rem 1rem; /* pushes modal down under navbar */
+  }
+
+  .modal {
+    width: min(780px, 100%);
+    max-height: calc(100vh - 6.5rem);
+  }
+
+  .modal-imageWrap {
+    max-height: 55vh; /* bigger image area */
+  }
+}
+
+@media (max-width: 640px) {
+  .projects {
+    padding: 1rem 0 4rem;
+  }
+
+  .projects-header h2 {
+    font-size: 2.1rem;
+  }
+
+  .projects-header p {
+    font-size: 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-thumb {
+    height: 160px;
+    width: 102%;
+  }
+
+  /* Push modal down + give more usable height */
+  .modal-overlay {
+    align-items: flex-start;
+    padding: 7.25rem 0.9rem 1rem;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: calc(100vh - 6.25rem);
+    border-radius: 16px;
+  }
+
+  .modal-top {
+    padding: 0.85rem 0.9rem;
+  }
+
+  /* Make the image area bigger and prevent it from shrinking too much */
+  .modal-body {
+    grid-template-columns: 36px 1fr 36px; /* smaller rails */
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .modal-imageWrap {
+    max-height: 62vh;   /* more height = bigger image */
+    overflow: auto;
+    border-radius: 12px;
+  }
+
+  /* Smaller nav buttons */
+  .modal-nav {
+    height: 34px;
+    width: 34px;
+    font-size: 1.25rem;
+  }
+
+  .modal-hint {
+    padding: 0.75rem 0.9rem 0.95rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px){
+    .modal-overlay {
+        padding: 9rem 0.9rem 1rem;
+    }
+    
+}
